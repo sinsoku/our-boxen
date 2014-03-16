@@ -1,6 +1,11 @@
 class people::sinsoku {
   include redis
 
+  package {
+    'vim':
+      ensure => latest;
+  }
+
   # font: ricty
   homebrew::tap { 'sanemat/font': }
   package { 'ricty':
