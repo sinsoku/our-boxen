@@ -77,6 +77,9 @@ class people::sinsoku {
   }
   exec { 'setup neobundle':
     command => "${neobundle_dir}/bin/neoinstall",
-    require => Repository[$neobundle_dir],
+    require => [
+      Repository[$dotfiles],
+      Repository[$neobundle_dir],
+    ]
   }
 }
