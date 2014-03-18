@@ -4,10 +4,31 @@ class people::sinsoku {
   $home = "/Users/${::boxen_user}"
   $dotfiles = "${home}/dotfiles"
 
-  repository { $dotfiles: source => 'sinsoku/dotfiles' }
+  package {
+    [
+      'bash-completion',
+      'git-flow',
+    ]:
+  }
   package {
     'vim':
       ensure => latest;
+  }
+
+  repository { $dotfiles: source => 'sinsoku/dotfiles' }
+
+  # bash
+  file { "${home}/.bash_profile":
+    ensure => link,
+    force => true,
+    target => "${dotfiles}/bash/.bash_profile",
+    require => Repository[$dotfiles],
+  }
+  file { "${home}/.bashrc":
+    ensure => link,
+    force => true,
+    target => "${dotfiles}/bash/.bashrc.mac",
+    require => Repository[$dotfiles],
   }
 
   # font: ricty
