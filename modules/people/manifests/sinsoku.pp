@@ -18,10 +18,10 @@ class people::sinsoku {
   repository { $dotfiles: source => 'sinsoku/dotfiles' }
 
   # bash
-  file { "${home}/.bash_profile":
+  file { "${home}/.profile":
     ensure => link,
     force => true,
-    target => "${dotfiles}/bash/.bash_profile",
+    target => "${dotfiles}/bash/.profile.mac",
     require => Repository[$dotfiles],
   }
   file { "${home}/.bashrc":
